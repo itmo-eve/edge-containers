@@ -64,12 +64,18 @@ var pushCmd = &cobra.Command{
 		)
 		if kernelFile != "" {
 			kernel = &registry.FileSource{Path: kernelFile}
+		} else {
+			kernel = nil
 		}
 		if initrdFile != "" {
 			initrd = &registry.FileSource{Path: initrdFile}
+		} else {
+			initrd = nil
 		}
 		if configFile != "" {
 			config = &registry.FileSource{Path: configFile}
+		} else {
+			config = nil
 		}
 		// construct and pass along
 		artifact := &registry.Artifact{
