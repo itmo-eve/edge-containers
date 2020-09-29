@@ -60,6 +60,8 @@ func (p *Puller) Pull(target Target, verbose bool, writer io.Writer, resolver ec
 		pullOpts = append(pullOpts, oras.WithPullBaseHandler(pullStatusTrack(writer)))
 	}
 	pullOpts = append(pullOpts, oras.WithAllowedMediaTypes(allowedMediaTypes))
+	pullOpts = append(pullOpts, oras.WithContentProvideIngester(decompressStore))
+	pullOpts = append(pullOpts, oras.WithPullEmptyNameAllowed())
 	// pull the images
 	desc, layers, err := p.Impl(ctx, resolver, p.Image, decompressStore, pullOpts...)
 	if err != nil {

@@ -4,14 +4,17 @@ import (
 	"archive/tar"
 	"compress/gzip"
 	"context"
+	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 	"io"
 	"strings"
 
 	"github.com/containerd/containerd/content"
+	orascontent "github.com/deislabs/oras/pkg/content"
 	log "github.com/sirupsen/logrus"
 )
 
 const (
+	MimeTypeDockerImageManifest = "application/vnd.docker.distribution.manifest.v2+json"
 	// Blocksize size of each slice of bytes read in each write through. Technically not a "block" size, but just like it.
 	Blocksize = 10240
 )
@@ -19,10 +22,19 @@ const (
 // DecompressWriter store to decompress content and extract from tar, if needed
 type DecompressStore struct {
 	ingester content.Ingester
+	cache    *orascontent.Memorystore
 }
 
 func NewDecompressStore(ingester content.Ingester) DecompressStore {
-	return DecompressStore{ingester}
+	return DecompressStore{
+		cache:    orascontent.NewMemoryStore(),
+		ingester: ingester,
+	}
+}
+
+// ReaderAt provides contents
+func (d DecompressStore) ReaderAt(ctx context.Context, desc ocispec.Descriptor) (content.ReaderAt, error) {
+	return d.cache.ReaderAt(ctx, desc)
 }
 
 // Writer get a writer
@@ -46,6 +58,9 @@ func (d DecompressStore) Writer(ctx context.Context, opts ...content.WriterOpt) 
 			return nil, err
 		}
 	}
+	if isAllowedMediaType(wOpts.Desc.MediaType, ocispec.MediaTypeImageManifest, ocispec.MediaTypeImageIndex, MimeTypeDockerImageManifest) || d.ingester == nil {
+		return d.cache.Writer(ctx, opts...)
+	}
 	desc := wOpts.Desc
 	// figure out which writer we need
 	hasGzip, hasTar := checkCompression(desc.MediaType)
@@ -56,6 +71,18 @@ func (d DecompressStore) Writer(ctx context.Context, opts ...content.WriterOpt) 
 		writer = NewGunzipWriter(writer)
 	}
 	return writer, nil
+}
+
+func isAllowedMediaType(mediaType string, allowedMediaTypes ...string) bool {
+	if len(allowedMediaTypes) == 0 {
+		return true
+	}
+	for _, allowedMediaType := range allowedMediaTypes {
+		if mediaType == allowedMediaType {
+			return true
+		}
+	}
+	return false
 }
 
 // untarWriter wrap a writer with an untar, so that the stream is untarred
