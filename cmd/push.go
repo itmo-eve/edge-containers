@@ -57,33 +57,22 @@ var pushCmd = &cobra.Command{
 			logrus.SetLevel(logrus.DebugLevel)
 		}
 
-		var (
-			kernel *registry.FileSource
-			initrd *registry.FileSource
-			config *registry.FileSource
-		)
-		if kernelFile != "" {
-			kernel = &registry.FileSource{Path: kernelFile}
-		} else {
-			kernel = nil
-		}
-		if initrdFile != "" {
-			initrd = &registry.FileSource{Path: initrdFile}
-		} else {
-			initrd = nil
-		}
-		if configFile != "" {
-			config = &registry.FileSource{Path: configFile}
-		} else {
-			config = nil
-		}
 		// construct and pass along
 		artifact := &registry.Artifact{
-			Kernel: kernel,
-			Initrd: initrd,
+			Kernel: &registry.FileSource{Path: kernelFile},
+			Initrd: &registry.FileSource{Path: initrdFile},
 			Root:   rootDisk,
-			Config: config,
+			Config: &registry.FileSource{Path: configFile},
 			Disks:  addlDisks,
+		}
+		if kernelFile == "" {
+			artifact.Kernel = nil
+		}
+		if initrdFile == "" {
+			artifact.Initrd = nil
+		}
+		if configFile == "" {
+			artifact.Config = nil
 		}
 		pusher := registry.Pusher{
 			Artifact: artifact,

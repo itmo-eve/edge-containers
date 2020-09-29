@@ -2,6 +2,7 @@ package registry
 
 import (
 	"context"
+	"fmt"
 	"io"
 
 	ctrcontent "github.com/containerd/containerd/content"
@@ -72,6 +73,12 @@ func (w FilesTarget) Writer(ctx context.Context, opts ...ctrcontent.WriterOpt) (
 	}
 	desc := wOpts.Desc
 
+	fmt.Println(desc.URLs)
+	fmt.Println(desc.Annotations)
+	fmt.Println(desc.Digest)
+	fmt.Println(desc.MediaType)
+	fmt.Println(desc.Platform)
+	fmt.Println(desc.Size)
 	// check if it meets the requirements
 	switch desc.Annotations[AnnotationRole] {
 	case RoleKernel:
