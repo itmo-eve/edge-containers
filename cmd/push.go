@@ -68,7 +68,7 @@ var pushCmd = &cobra.Command{
 		if initrdFile != "" {
 			initrd = &registry.FileSource{Path: initrdFile}
 		}
-		if configFile == "" {
+		if configFile != "" {
 			config = &registry.FileSource{Path: configFile}
 		}
 		// construct and pass along
