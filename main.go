@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/lf-edge/edge-containers/cmd"
+	"github.com/itmo-eve/edge-containers/cmd"
 )
 
 func main() {

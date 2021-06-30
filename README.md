@@ -4,7 +4,7 @@ This repository contains a golang library and CLI for VM images, manage
 disk images, kernel, initrd and other bootable artifacts in OCI registries. It can
 build, push and pull those images.
 
-It is inspired directly by [ORAS](https://github.com/deislabs/oras) and leverages it, but is opinionated to the ECI use case. As such, it uses elements of [OCI Artifacts](http://github.com/opencontainers/artifacts).
+It is inspired directly by [ORAS](https://github.com/oras-project/oras) and leverages it, but is opinionated to the ECI use case. As such, it uses elements of [OCI Artifacts](http://github.com/opencontainers/artifacts).
 
 It can store the images in multiple formats:
 
@@ -235,7 +235,7 @@ The parsing process is as follows:
 
 ## Go Library
 
-The go library is `github.com/lf-edge/edge-containers/pkg/registry`. Docs are available at [godoc.org/github.com/lf-edge/edge-containers/pkg/registry](https://godoc.org/github.com/lf-edge/edge-containers/pkg/registry).
+The go library is `github.com/itmo-eve/edge-containers/pkg/registry`. Docs are available at [godoc.org/github.com/itmo-eve/edge-containers/pkg/registry](https://godoc.org/github.com/itmo-eve/edge-containers/pkg/registry).
 
 ## Build
 

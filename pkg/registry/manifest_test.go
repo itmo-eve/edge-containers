@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/lf-edge/edge-containers/pkg/registry"
+	"github.com/itmo-eve/edge-containers/pkg/registry"
 
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 )

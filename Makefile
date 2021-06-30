@@ -1,6 +1,6 @@
 SHELL=/bin/sh
 BINARY ?= eci
-PACKAGE_NAME?=github.com/lf-edge/edge-containers
+PACKAGE_NAME?=github.com/itmo-eve/edge-containers
 GOLANGCI_VERSION=v1.34.1
 GIT_VERSION?=$(shell git log -1 --format="%h")
 VERSION?=$(GIT_VERSION)

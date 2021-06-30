@@ -8,9 +8,9 @@ import (
 
 	ctrcontent "github.com/containerd/containerd/content"
 	"github.com/containerd/containerd/remotes"
-	"github.com/deislabs/oras/pkg/content"
-	"github.com/deislabs/oras/pkg/oras"
-	ecresolver "github.com/lf-edge/edge-containers/pkg/resolver"
+	ecresolver "github.com/itmo-eve/edge-containers/pkg/resolver"
+	"oras.land/oras-go/pkg/content"
+	"oras.land/oras-go/pkg/oras"
 
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 )
@@ -61,7 +61,7 @@ func (p *Puller) Pull(target Target, blocksize int, verbose bool, writer io.Writ
 		pullOpts = append(pullOpts, oras.WithPullStatusTrack(writer))
 	}
 
-	// provide our own cache because of https://github.com/deislabs/oras/issues/225 and https://github.com/deislabs/oras/issues/226
+	// provide our own cache because of https://github.com/oras-project/oras/issues/225 and https://github.com/oras-project/oras/issues/226
 	store := newCacheStoreFromIngester(decompressStore)
 	pullOpts = append(pullOpts, oras.WithAllowedMediaTypes(allowedMediaTypes), oras.WithPullEmptyNameAllowed(), oras.WithContentProvideIngester(store), oras.WithPullByBFS)
 

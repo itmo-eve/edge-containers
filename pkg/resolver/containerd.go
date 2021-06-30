@@ -33,7 +33,7 @@ const (
 // we complete here on the Containerd resolver, which means
 // this should be used exactly once for Pusher, and then discarded,
 // as finalize will be called.
-// See https://github.com/deislabs/oras/issues/172
+// See https://github.com/oras-project/oras/issues/172
 // When the above is fixed, we can do better with this.
 type Containerd struct {
 	client    *containerd.Client

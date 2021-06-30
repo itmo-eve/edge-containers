@@ -5,7 +5,7 @@ import (
 	"log"
 	"strings"
 
-	ecresolver "github.com/lf-edge/edge-containers/pkg/resolver"
+	ecresolver "github.com/itmo-eve/edge-containers/pkg/resolver"
 	"github.com/spf13/cobra"
 )
 

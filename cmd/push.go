@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/lf-edge/edge-containers/pkg/registry"
+	"github.com/itmo-eve/edge-containers/pkg/registry"
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"

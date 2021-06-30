@@ -7,9 +7,9 @@ import (
 	"path"
 	"time"
 
-	"github.com/lf-edge/edge-containers/pkg/tgz"
+	"github.com/itmo-eve/edge-containers/pkg/tgz"
 
-	"github.com/deislabs/oras/pkg/content"
+	"oras.land/oras-go/pkg/content"
 
 	ctrcontent "github.com/containerd/containerd/content"
 	digest "github.com/opencontainers/go-digest"

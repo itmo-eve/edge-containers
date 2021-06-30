@@ -2,10 +2,10 @@ package registry
 
 /*
   This entire document is because the oras default hybridStore
-  which is at https://github.com/deislabs/oras/blob/173c010570c48e4aa18ce186cae8cc812f8e8b6e/pkg/oras/store.go
+  which is at https://github.com/oras-project/oras/blob/173c010570c48e4aa18ce186cae8cc812f8e8b6e/pkg/oras/store.go
   in oras has 2 shortcomings:
-    https://github.com/deislabs/oras/issues/225
-    https://github.com/deislabs/oras/issues/226
+    https://github.com/oras-project/oras/issues/225
+    https://github.com/oras-project/oras/issues/226
   when those are resolved, this all can go away.
 */
 
@@ -15,7 +15,7 @@ import (
 	"io"
 	"time"
 
-	orascontent "github.com/deislabs/oras/pkg/content"
+	orascontent "oras.land/oras-go/pkg/content"
 
 	"github.com/containerd/containerd/content"
 	"github.com/containerd/containerd/images"
